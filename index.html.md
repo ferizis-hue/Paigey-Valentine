@@ -1,0 +1,314 @@
+<!doctype html>  
+<html lang="en">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <title>💘 Paigey?</title>  
+  <style>  
+    :root {  
+      --bg1:#ff9a9e; --bg2:#fad0c4;  
+      --card:#ffffffd9; --text:#2b2b2b;  
+      --yes:#ff4d6d; --yes2:#ff758f;  
+      --danger:#b42318;  
+    }  
+    * { box-sizing: border-box; }  
+    body{  
+      margin:0; min-height:100vh; display:grid; place-items:center;  
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;  
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));  
+      color:var(--text);  
+      overflow:hidden;  
+    }  
+    .card{  
+      width:min(560px, 92vw);  
+      background:var(--card);  
+      border-radius:24px;  
+      padding:28px 22px;  
+      box-shadow:0 18px 50px rgba(0,0,0,.18);  
+      text-align:center;  
+      position:relative;  
+    }  
+    h1{ margin:0 0 8px; font-size:clamp(26px,4.5vw,40px); }  
+    p{ margin:0 0 14px; font-size:16px; line-height:1.4; }  
+    .name{ font-weight:800; }  
+    .hidden{ display:none; }  
+  
+    .inputRow{  
+      display:flex; gap:10px; justify-content:center; flex-wrap:wrap;  
+      margin-top:10px;  
+    }  
+    input{  
+      width:min(320px, 78vw);  
+      padding:14px 14px;  
+      border-radius:14px;  
+      border:2px solid rgba(0,0,0,.08);  
+      font-size:16px;  
+      outline:none;  
+    }  
+    input:focus{ border-color: rgba(255,77,109,.45); }  
+    .btn{  
+      border:0; padding:14px 18px; border-radius:14px;  
+      font-size:16px; font-weight:800; cursor:pointer;  
+      transition: transform .08s ease;  
+      -webkit-tap-highlight-color: transparent;  
+    }  
+    .btn:active{ transform: scale(.98); }  
+    .btnPrimary{  
+      background: linear-gradient(135deg, var(--yes), var(--yes2));  
+      color:white;  
+      box-shadow:0 10px 22px rgba(255,77,109,.35);  
+      min-width:140px;  
+    }  
+    .error{  
+      margin-top:10px;  
+      color: var(--danger);  
+      font-weight:800;  
+      min-height:22px;  
+    }  
+    .hint{  
+      margin-top:6px;  
+      font-size:13px;  
+      opacity:.75;  
+    }  
+  
+    .photoWrap{  
+      margin:14px 0 4px;  
+      display:grid;  
+      gap:10px;  
+      justify-items:center;  
+    }  
+    .photo{  
+      width:min(440px, 88vw);  
+      border-radius:18px;  
+      border:2px solid rgba(0,0,0,.06);  
+      box-shadow:0 14px 30px rgba(0,0,0,.15);  
+      display:block;  
+      object-fit:cover;  
+    }  
+    .caption{  
+      font-weight:800;  
+      font-size:15px;  
+      opacity:.9;  
+    }  
+  
+    .btns{  
+      margin-top:18px;  
+      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;  
+      position:relative;  
+    }  
+    button{  
+      border:0; padding:14px 18px; border-radius:14px;  
+      font-size:18px; font-weight:800;  
+      cursor:pointer;  
+      transition: transform .08s ease;  
+      -webkit-tap-highlight-color: transparent;  
+    }  
+    button:active{ transform: scale(.98); }  
+    #yes{  
+      background: linear-gradient(135deg, var(--yes), var(--yes2));  
+      color:white;  
+      box-shadow:0 10px 22px rgba(255,77,109,.35);  
+      min-width:150px;  
+    }  
+    #no{  
+      background:#eef0f2;  
+      color:#333;  
+      min-width:150px;  
+      position:relative;  
+    }  
+  
+    .yes-screen{  
+      margin-top:18px;  
+      background:white;  
+      border-radius:18px;  
+      padding:16px 14px;  
+      border:2px dashed rgba(255,77,109,.35);  
+      text-align:center;  
+    }  
+    .bigYes{  
+      font-size:clamp(36px,6vw,56px);  
+      margin:4px 0 8px;  
+      font-weight:900;  
+      letter-spacing:1px;  
+    }  
+    .footer{  
+      margin-top:12px; font-size:13px; opacity:.8;  
+    }  
+  
+    .confetti{  
+      position:fixed; inset:0; pointer-events:none;  
+    }  
+    .heart{  
+      position:absolute;  
+      animation: floatUp 2.8s ease-in forwards;  
+      font-size:20px;  
+      opacity:.9;  
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));  
+    }  
+    @keyframes floatUp{  
+      from{ transform: translateY(20px) scale(1); opacity:0; }  
+      15%{ opacity:1; }  
+      to{ transform: translateY(-120vh) scale(1.25); opacity:0; }  
+    }  
+  </style>  
+</head>  
+  
+<body>  
+  <div class="card" role="main" aria-live="polite">  
+  
+    <!-- Screen 1: WAIT GATE -->  
+    <section id="waitGate">  
+      <h1>Paigey… wait 😌</h1>  
+      <p>You know the rule.</p>  
+      <p>Type <strong>waiting</strong> to continue.</p>  
+  
+      <div class="inputRow">  
+        <input id="waitInput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false"  
+               placeholder="type here…" />  
+        <button class="btn btnPrimary" id="waitBtn">Continue</button>  
+      </div>  
+  
+      <div class="error" id="waitError" aria-live="polite"></div>  
+      <div class="hint">Capitalisation doesn’t matter. (But the word does.)</div>  
+    </section>  
+  
+    <!-- Screen 2: VALENTINE QUESTION -->  
+    <section id="valentine" class="hidden">  
+      <h1>Okay <span class="name">Paigey</span> 💘</h1>  
+      <p>I made you a tiny website for a big question…</p>  
+  
+      <!-- Photo that changes when she taps "No" -->  
+      <div class="photoWrap">  
+        <img class="photo" id="usPhoto" src="us1.jpg" alt="A photo of us together" />  
+        <div class="caption" id="usCaption">us 🫶</div>  
+      </div>  
+  
+      <h1 style="margin-top:6px;">Will you be my Valentine?</h1>  
+  
+      <div class="btns" id="buttons">  
+        <button id="yes">YES 🥰</button>  
+        <button id="no">No 🙈</button>  
+      </div>  
+  
+      <div class="yes-screen hidden" id="yesScreen">  
+        <div class="bigYes">YES!!! 💞</div>  
+  
+        <div class="photoWrap">  
+          <img class="photo" id="babyPhoto" src="baby.jpg" alt="A baby photo of me, happy" />  
+          <div class="caption">look how happy this lil guy is now</div>  
+        </div>  
+  
+        <div class="footer">Made with love ❤️</div>  
+      </div>  
+    </section>  
+  </div>  
+  
+  <div class="confetti" id="confetti"></div>  
+  
+  <script>  
+    // =====================  
+    // 1) WAIT GATE  
+    // =====================  
+    const REQUIRED = "waiting";  
+  
+    const waitGate  = document.getElementById("waitGate");  
+    const waitInput = document.getElementById("waitInput");  
+    const waitBtn   = document.getElementById("waitBtn");  
+    const waitError = document.getElementById("waitError");  
+    const valentine = document.getElementById("valentine");  
+  
+    function checkWaiting(){  
+      const typed = (waitInput.value || "").trim().toLowerCase();  
+      if (typed === REQUIRED){  
+        waitError.textContent = "";  
+        waitGate.classList.add("hidden");  
+        valentine.classList.remove("hidden");  
+        if (navigator.vibrate) navigator.vibrate([50]);  
+      } else {  
+        waitError.textContent = "you know better";  
+        if (navigator.vibrate) navigator.vibrate([30, 30, 30]);  
+      }  
+    }  
+  
+    waitBtn.addEventListener("click", checkWaiting);  
+    waitInput.addEventListener("keydown", (e)=> {  
+      if (e.key === "Enter") checkWaiting();  
+    });  
+  
+    // =====================  
+    // 2) IMAGE ROTATION ON "NO"  
+    // =====================  
+    // IMPORTANT: these filenames must match exactly what is in your folder  
+    const usPhotos = ["us1.jpg", "us2.jpg", "us3.jpg", "us4.jpg"];  
+    let currentUsIndex = 0;  
+  
+    const usPhotoEl = document.getElementById("usPhoto");  
+    const usCaption = document.getElementById("usCaption");  
+  
+    function nextUsPhoto(){  
+      currentUsIndex = (currentUsIndex + 1) % usPhotos.length;  
+      usPhotoEl.src = usPhotos[currentUsIndex];  
+      usCaption.textContent = `us 🫶 (${currentUsIndex + 1}/${usPhotos.length})`;  
+    }  
+  
+    // =====================  
+    // 3) VALENTINE BUTTONS  
+    // =====================  
+    const yesBtn    = document.getElementById("yes");  
+    const noBtn     = document.getElementById("no");  
+    const yesScreen = document.getElementById("yesScreen");  
+    const buttons   = document.getElementById("buttons");  
+    const confetti  = document.getElementById("confetti");  
+  
+    function popHearts(count = 34){  
+      const emojis = ["💖","💘","💝","💕","💗","💞","❤️"];  
+      for(let i=0;i<count;i++){  
+        const s = document.createElement("div");  
+        s.className = "heart";  
+        s.textContent = emojis[Math.floor(Math.random()*emojis.length)];  
+        s.style.left = Math.random()*100 + "vw";  
+        s.style.bottom = (-10 + Math.random()*20) + "px";  
+        s.style.fontSize = (16 + Math.random()*22) + "px";  
+        s.style.animationDuration = (2.2 + Math.random()*1.4) + "s";  
+        s.style.transform = `translateY(0) rotate(${Math.random()*40-20}deg)`;  
+        confetti.appendChild(s);  
+        setTimeout(()=> s.remove(), 3500);  
+      }  
+    }  
+  
+    yesBtn.addEventListener("click", ()=>{  
+      buttons.classList.add("hidden");  
+      yesScreen.classList.remove("hidden");  
+      popHearts(46);  
+      if (navigator.vibrate) navigator.vibrate([80, 40, 80]);  
+    });  
+  
+    // No button: rotate photo + run away  
+    let dodges = 0;  
+  
+    function dodge(){  
+      dodges++;  
+  
+      // Change the couple photo each time "No" gets tapped  
+      if (usPhotos.length > 1) nextUsPhoto();  
+  
+      const maxX = 220, maxY = 120;  
+      const x = (Math.random()*maxX - maxX/2);  
+      const y = (Math.random()*maxY - maxY/2);  
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;  
+  
+      if (dodges >= 6){  
+        noBtn.textContent = "Okay fine… YES 😌";  
+        noBtn.style.background = "#fff0f3";  
+      }  
+    }  
+  
+    noBtn.addEventListener("mouseenter", dodge);  
+    noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); dodge(); }, {passive:false});  
+    noBtn.addEventListener("click", ()=>{  
+      if (dodges >= 6) yesBtn.click();  
+      else dodge();  
+    });  
+  </script>  
+</body>  
+</html>  
